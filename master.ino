@@ -1,8 +1,4 @@
 #include <SPI.h>
-#define MISO 12
-#define MOSI 11
-#define SCK 13
-#define SS 10
 #include <OLED_I2C.h>
 OLED myOLED(SDA, SCL);
 extern uint8_t SmallFont[];
@@ -23,10 +19,7 @@ uint16_t cmd;
 byte pack[2];
 void setup() {
   //Serial.begin(9600);
-  pinMode(MISO, INPUT);
-  pinMode(MOSI, OUTPUT);
-  pinMode(SCK, OUTPUT);
-  pinMode(SS, OUTPUT);
+  pinMode(SS, OUTPUT); // настройка линии SS как выход
   SPI.begin();
   digitalWrite(SS, HIGH);
   myOLED.begin();
@@ -192,20 +185,15 @@ void detectbuttons() {
 
   if (button == 's') {
     //    Serial.println("Button send");
-    for (int cnt = 0; cnt < 3; cnt++) {  //цикл костыль. я пока не знаю что тут происходит
       pack[0] = cmd >> 8;
       pack[1] = cmd;
       digitalWrite(SS, LOW);
-      SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));  //2мгц, первым уходит старший, мод0: исходоное состояние синхросигнала 0, выборка по переднему фронту
       for (int i = 0; i < 2; i++) {
-        SPDR = pack[i];  // "суём" байт
-        while (!(SPSR & (1 << SPIF)));  // ждём, когда он "уйдёт"
+        SPI.transfer(pack[i]);
       }
-    }
-  } else {
-    SPI.endTransaction();
-    digitalWrite(SS, HIGH);
-  }
+      digitalWrite(SS, HIGH);
+      delay(1000);
+   }
 
   if (button == 'd') {
     //    Serial.println("Button del");
