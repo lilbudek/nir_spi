@@ -185,8 +185,8 @@ void detectbuttons() {
 
   if (button == 's') {
     //    Serial.println("Button send");
-      pack[0] = cmd >> 8;
-      pack[1] = cmd;
+      pack[0] = cmd;
+      pack[1] = cmd >> 8;
       digitalWrite(SS, LOW);
       for (int i = 0; i < 2; i++) {
         SPI.transfer(pack[i]);
