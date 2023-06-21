@@ -19,7 +19,7 @@ uint16_t cmd;
 byte pack[2];
 void setup() {
   //Serial.begin(9600);
-  pinMode(SS, OUTPUT); // настройка линии SS как выход
+  pinMode(SS, OUTPUT);  // настройка линии SS как выход
   SPI.begin();
   digitalWrite(SS, HIGH);
   myOLED.begin();
@@ -39,182 +39,199 @@ void loop() {
 }
 
 void detectbuttons() {
-  if (button == '0') {
-    //    Serial.println("Button 0");
-    if (cmd == 0)
-      cmd = 0x0000;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0000;
-  }
+  switch (button) {
+    case '0':
+      //    Serial.println("Button 0");
+      if (cmd == 0) {
+        cmd = 0x0000;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0000;
+      }
+      break;
 
-  if (button == '1') {
-    //    Serial.println("Button 1");
-    if (cmd == 0)
-      cmd = 0x0001;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0001;
-  }
+    case '1':
+      //    Serial.println("Button 1");
+      if (cmd == 0) {
+        cmd = 0x0001;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0001;
+      }
+      break;
 
-  if (button == '2') {
-    //    Serial.println("Button 2");
-    if (cmd == 0)
-      cmd = 0x0002;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0002;
-  }
+    case '2':
+      //    Serial.println("Button 2");
+      if (cmd == 0) {
+        cmd = 0x0002;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0002;
+      }
+      break;
 
-  if (button == '3') {
-    //    Serial.println("Button 3");
-    if (cmd == 0)
-      cmd = 0x0003;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0003;
-  }
+    case '3':
+      //    Serial.println("Button 3");
+      if (cmd == 0) {
+        cmd = 0x0003;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0003;
+      }
+      break;
 
-  if (button == '4') {
-    //    Serial.println("Button 4");
-    if (cmd == 0)
-      cmd = 0x0004;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0004;
-  }
+    case '4':
+      //    Serial.println("Button 4");
+      if (cmd == 0) {
+        cmd = 0x0004;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0004;
+      }
+      break;
 
-  if (button == '5') {
-    //    Serial.println("Button 5");
-    if (cmd == 0)
-      cmd = 0x0005;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0005;
-  }
+    case '5':
+      //    Serial.println("Button 5");
+      if (cmd == 0) {
+        cmd = 0x0005;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0005;
+      }
+      break;
 
-  if (button == '6') {
-    //    Serial.println("Button 6");
-    if (cmd == 0)
-      cmd = 0x0006;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0006;
-  }
+    case '6':
+      //    Serial.println("Button 6");
+      if (cmd == 0) {
+        cmd = 0x0006;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0006;
+      }
+      break;
 
-  if (button == '7') {
-    //    Serial.println("Button 7");
-    if (cmd == 0)
-      cmd = 0x0007;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0007;
-  }
+    case '7':
+      //    Serial.println("Button 7");
+      if (cmd == 0) {
+        cmd = 0x0007;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0007;
+      }
+      break;
 
-  if (button == '8') {
-    //    Serial.println("Button 8");
-    if (cmd == 0)
-      cmd = 0x0008;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0008;
-  }
+    case '8':
+      //    Serial.println("Button 8");
+      if (cmd == 0) {
+        cmd = 0x0008;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0008;
+      }
+      break;
 
-  if (button == '9') {
-    //    Serial.println("Button 9");
-    if (cmd == 0)
-      cmd = 0x0009;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0009;
-  }
+    case '9':
+      //    Serial.println("Button 9");
+      if (cmd == 0) {
+        cmd = 0x0009;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x0009;
+      }
+      break;
 
-  if (button == 'A') {
-    //    Serial.println("Button A");
-    if (cmd == 0)
-      cmd = 0x000A;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000A;
-  }
+    case 'A':
+      //    Serial.println("Button A");
+      if (cmd == 0) {
+        cmd = 0x000A;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x000A;
+      }
+      break;
 
-  if (button == 'B') {
-    //    Serial.println("Button B");
-    if (cmd == 0)
-      cmd = 0x000B;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000B;
-  }
+    case 'B':
+      //    Serial.println("Button B");
+      if (cmd == 0) {
+        cmd = 0x000B;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x000B;
+      }
+      break;
 
-  if (button == 'C') {
-    //    Serial.println("Button C");
-    if (cmd == 0)
-      cmd = 0x000C;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000C;
-  }
+    case 'C':
+      //    Serial.println("Button C");
+      if (cmd == 0) {
+        cmd = 0x000C;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x000C;
+      }
+      break;
 
-  if (button == 'D') {
-    //    Serial.println("Button D");
-    if (cmd == 0)
-      cmd = 0x000D;
-    else
-      cmd = (cmd << 4);  //Pressed twice
-      cmd |= 0x000D;
-  }
+    case 'D':
+      //    Serial.println("Button D");
+      if (cmd == 0) {
+        cmd = 0x000D;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x000D;
+      }
+      break;
 
-  if (button == 'E') {
-    //    Serial.println("Button E");
-    if (cmd == 0)
-      cmd = 0x000E;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000E;
-  }
+    case 'E':
+      //    Serial.println("Button E");
+      if (cmd == 0) {
+        cmd = 0x000E;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x000E;
+      }
+      break;
 
-  if (button == 'F') {
-    //    Serial.println("Button F");
-    if (cmd == 0)
-      cmd = 0x000F;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000F;
-  }
+    case 'F':
+      //    Serial.println("Button F");
+      if (cmd == 0) {
+        cmd = 0x000F;
+      } else {
+        cmd = cmd << 4;
+        cmd |= 0x000F;
+      }
+      break;
 
-  if (button == 's') {
-    //    Serial.println("Button send");
+    case 's':
+      //    Serial.println("Button send");
       pack[0] = cmd;
       pack[1] = cmd >> 8;
       digitalWrite(SS, LOW);
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 2; i++)
         SPI.transfer(pack[i]);
-      }
       digitalWrite(SS, HIGH);
       delay(1000);
-   }
+      break;
 
-  if (button == 'd') {
-    //    Serial.println("Button del");
-    cmd = cmd >> 4;
-  }
+    case 'd':
+      //    Serial.println("Button del");
+      cmd = cmd >> 4;
+      break;
 
-  if (button == 'h') {  //хелпа
-    while (1) {
-      myOLED.clrScr();
-      myOLED.print("Help", CENTER, 0);
-      myOLED.print("0 1 2 3 h", CENTER, 16);
-      myOLED.print("4 5 6 7 x", CENTER, 26);
-      myOLED.print("8 9 A B s", CENTER, 36);
-      myOLED.print("C D E F d", CENTER, 46);
-      myOLED.update();
-      button = customKeypad.getKey();
-      detectbuttons();
-      if (button) {
-        cmd = 0x00;
-        break;
+    case 'h':  //help
+      while (1) {
+        myOLED.clrScr();
+        myOLED.print("Help", CENTER, 0);
+        myOLED.print("0 1 2 3 h", CENTER, 16);
+        myOLED.print("4 5 6 7 x", CENTER, 26);
+        myOLED.print("8 9 A B s", CENTER, 36);
+        myOLED.print("C D E F d", CENTER, 46);
+        myOLED.update();
+        button = customKeypad.getKey();
+        detectbuttons();
+        if (button) {
+          cmd = 0x00;
+          break;
+        }
       }
-    }
+      break;
   }
 }
