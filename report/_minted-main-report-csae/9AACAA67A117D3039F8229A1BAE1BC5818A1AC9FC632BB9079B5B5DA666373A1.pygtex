@@ -1,0 +1,58 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+void detectbuttons() \PYGZob{}
+  if (button == \PYGZsq{}0\PYGZsq{}) \PYGZob{}
+    //    Serial.println(\PYGZdq{}Button 0\PYGZdq{});
+    if (cmd == 0)
+      cmd = 0x0000;
+    else
+      cmd = cmd \PYGZlt{}\PYGZlt{} 4;  //Pressed twice
+      cmd |= 0x0000;
+  \PYGZcb{}
+
+  ...
+
+  if (button == \PYGZsq{}F\PYGZsq{}) \PYGZob{}
+    //    Serial.println(\PYGZdq{}Button F\PYGZdq{});
+    if (cmd == 0)
+      cmd = 0x000F;
+    else
+      cmd = cmd \PYGZlt{}\PYGZlt{} 4;  //Pressed twice
+      cmd |= 0x000F;
+  \PYGZcb{}
+
+  if (button == \PYGZsq{}s\PYGZsq{}) \PYGZob{}
+    //    Serial.println(\PYGZdq{}Button send\PYGZdq{});
+      pack[0] = cmd;
+      pack[1] = cmd \PYGZgt{}\PYGZgt{} 8;
+      digitalWrite(SS, LOW);
+      for (int i = 0; i \PYGZlt{} 2; i++) \PYGZob{}
+        SPI.transfer(pack[i]);
+      \PYGZcb{}
+      digitalWrite(SS, HIGH);
+      delay(1000);
+   \PYGZcb{}
+
+
+  if (button == \PYGZsq{}d\PYGZsq{}) \PYGZob{}
+    //    Serial.println(\PYGZdq{}Button del\PYGZdq{});
+    cmd = cmd \PYGZgt{}\PYGZgt{} 4;
+  \PYGZcb{}
+
+  if (button == \PYGZsq{}h\PYGZsq{}) \PYGZob{}  //help
+    while (1) \PYGZob{}
+      myOLED.clrScr();
+      myOLED.print(\PYGZdq{}Help\PYGZdq{}, CENTER, 0);
+      myOLED.print(\PYGZdq{}0 1 2 3 h\PYGZdq{}, CENTER, 16);
+      myOLED.print(\PYGZdq{}4 5 6 7 x\PYGZdq{}, CENTER, 26);
+      myOLED.print(\PYGZdq{}8 9 A B s\PYGZdq{}, CENTER, 36);
+      myOLED.print(\PYGZdq{}C D E F d\PYGZdq{}, CENTER, 46);
+      myOLED.update();
+      button = customKeypad.getKey();
+      detectbuttons();
+      if (button) \PYGZob{}
+        cmd = 0x00;
+        break;
+      \PYGZcb{}
+    \PYGZcb{}
+  \PYGZcb{}
+\end{Verbatim}
