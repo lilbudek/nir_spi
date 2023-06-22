@@ -1,0 +1,165 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}SPI.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}OLED\PYGZus{}I2C.h\PYGZgt{}}
+\PYG{n}{OLED}\PYG{+w}{ }\PYG{n+nf}{myOLED}\PYG{p}{(}\PYG{n}{SDA}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SCL}\PYG{p}{);}
+\PYG{k}{extern}\PYG{+w}{ }\PYG{k+kt}{uint8\PYGZus{}t}\PYG{+w}{ }\PYG{n}{SmallFont}\PYG{p}{[];}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}Keypad.h\PYGZgt{}}
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{ROWS}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{COLS}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{;}
+\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{button}\PYG{p}{;}
+\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{keys}\PYG{p}{[}\PYG{n}{ROWS}\PYG{p}{][}\PYG{n}{COLS}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}2\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}3\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}h\PYGZsq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}4\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}5\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}6\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}7\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}x\PYGZsq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}8\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}9\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}B\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}s\PYGZsq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}C\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}D\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}E\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}F\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}d\PYGZsq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{rowPins}\PYG{p}{[}\PYG{n}{ROWS}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{A0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{A1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{A2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{A3}\PYG{+w}{ }\PYG{p}{\PYGZcb{};}\PYG{+w}{  }\PYG{c+c1}{// подключение к строкам клавиатуры}
+\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{colPins}\PYG{p}{[}\PYG{n}{COLS}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{p}{\PYGZcb{};}\PYG{+w}{   }\PYG{c+c1}{// подключение к столбцам клавиатуры}
+\PYG{n}{Keypad}\PYG{+w}{ }\PYG{n}{customKeypad}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Keypad}\PYG{p}{(}\PYG{n}{makeKeymap}\PYG{p}{(}\PYG{n}{keys}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{rowPins}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{colPins}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ROWS}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{COLS}\PYG{p}{);}
+\PYG{k+kt}{uint16\PYGZus{}t}\PYG{+w}{ }\PYG{n}{cmd}\PYG{p}{;}
+\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{pack}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{];}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setup}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{c+c1}{//Serial.begin(9600);}
+\PYG{+w}{  }\PYG{n}{SPI}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{setFont}\PYG{p}{(}\PYG{n}{SmallFont}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{clrScr}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{update}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{loop}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{clrScr}\PYG{p}{();}
+\PYG{+w}{  }\PYG{n}{button}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{customKeypad}\PYG{p}{.}\PYG{n}{getKey}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// определение нажатой кнопки}
+\PYG{+w}{  }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{button}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{NO\PYGZus{}KEY}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{detectbuttons}\PYG{p}{();}
+\PYG{+w}{  }\PYG{c+c1}{//Serial.println(button);}
+\PYG{+w}{  }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{n}{String}\PYG{p}{(}\PYG{n}{cmd}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{HEX}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{25}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{//выводим на экран вводимую команду}
+\PYG{+w}{  }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{update}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{k+kt}{uint16\PYGZus{}t}\PYG{+w}{ }\PYG{n}{comand}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{comand}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{|=}\PYG{+w}{ }\PYG{n}{comand}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{detectbuttons}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{switch}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{button}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 0\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0000}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 1\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0001}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}2\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 2\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0002}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}3\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 3\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0003}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}4\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 4\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0004}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}5\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 5\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0005}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}6\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 6\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0006}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}7\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 7\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0007}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}8\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 8\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0008}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}9\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 9\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0009}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button A\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x000A}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}B\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button B\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x000B}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}C\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button C\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x000C}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}D\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button D\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x000D}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}E\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button E\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x000E}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}F\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button F\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x000F}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}s\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button send\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{pack}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cmd}\PYG{p}{;}
+\PYG{+w}{      }\PYG{n}{pack}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{8}\PYG{p}{;}
+\PYG{+w}{      }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{SS}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{LOW}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{SPI}\PYG{p}{.}\PYG{n}{transfer}\PYG{p}{(}\PYG{n}{pack}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]);}
+\PYG{+w}{      }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{SS}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{HIGH}\PYG{p}{);}
+\PYG{+w}{      }\PYG{n}{delay}\PYG{p}{(}\PYG{l+m+mi}{1000}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}d\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button del\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}h\PYGZsq{}}\PYG{p}{:}\PYG{+w}{  }\PYG{c+c1}{//help}
+\PYG{+w}{      }\PYG{k}{do}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{clrScr}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Help\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}0 1 2 3 h\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{16}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}4 5 6 7 x\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{26}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}8 9 A B s\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{36}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}C D E F d\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{46}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{update}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{button}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{customKeypad}\PYG{p}{.}\PYG{n}{getKey}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{detectbuttons}\PYG{p}{();}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{button}\PYG{p}{);}
+\PYG{+w}{      }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mh}{0x0000}\PYG{p}{;}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\end{Verbatim}

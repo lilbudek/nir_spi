@@ -3,7 +3,7 @@
 \worktype{Отчёт по научно-исследовательской работе:}
 \title{Тестер ведомых SPI устройств}
 \author{Д.\,С.~Вебер}
-\groupnumber{565}
+\groupnumber{506}
 \GradebookNumber{1337}
 \supervisor{П.\,Н.~Уланов}
 \supervisordegree{ст. пр. каф. ВТиЭ}
@@ -23,7 +23,7 @@
  	 В результате выполнения научно-исследовательской работы был создан макет управляющего устройства, с помощью которого подаются различные команды ведомому устройству, работающему по SPI интерфейсу передачи данных. 
  	 }
 %\abstractEN{Большой текст на английском!}
-\keysRU{*}
+\keysRU{интерфейсы передачи данных, программирование микроконтроллеров}
 \keysEN{computer simulation, distributed version control}
 
 \date{\the\year}
@@ -49,20 +49,19 @@
 	
 	Логично возникает вопрос с помощью чего устройства управляются и отлаживаются. Для такой задачи требуются ведущие устройства, которые передают данные ведомым. Поэтому разработка управляющих устройств несомненно остаётся необходимой и актуальной.
 	
-	В данной научно-исследовательской работе объектом обзора являются интерфейсы передачи данных, программирование микроконтроллеров. 
+	В данной научно-исследовательской работе объектом исследования являются интерфейсы передачи данных, программирование микроконтроллеров. 
 	
 	Целью работы является создать рабочий макет тестера.
 	
 	Задачи научно-исследовательской работы:  
 	\begin{enumerate}
-		\item Выбрать инструменты разработки.
-		\item Определить внешний вид макета. %TODO
+		\item Выбрать инструменты для разработки программы.
 		\item Разработать программу.
 		\item Собрать макет.
 		\item Проверить работоспособность.
 	\end{enumerate}
 
-\chapter{Обзорная глава} %TODO название
+\chapter{Коротко о SPI} 
 
 	SPI (англ. Serial Peripheral Interface, SPI bus — последовательный периферийный интерфейс, шина SPI) — последовательный синхронный стандарт передачи данных в режиме полного дуплекса, предназначенный для обеспечения простого и недорогого высокоскоростного сопряжения микроконтроллеров и периферии. Устройства, которые работают по протоколу SPI, используются в широком спектре областей, включая электронику, автомобильную промышленность, медицинское оборудование, промышленные системы и другие. Он может использоваться для передачи различных типов данных, таких как цифровые данные, команды, адреса и т.д. В зависимости от конкретной системы, которая использует протокол SPI, можно передавать следующие типы данных:
 	\begin{enumerate}
@@ -72,13 +71,9 @@
 		\item Управляющие сигналы: помимо данных и адресов, протокол SPI может использоваться для передачи различных управляющих сигналов, таких как сигналы часов, выборки устройств, и т.д.
 	\end{enumerate}	 
 	
-	В целом, протокол SPI является очень гибким и может быть использован для передачи различных типов данных в зависимости от конкретной системы, которая использует этот протокол и существует множество устройств, которые могут работать в качестве SPI Master. Микроконтроллеры, такие как Arduino, Raspberry Pi или STM32, имеют встроенные контроллеры SPI, которые могут быть использованы в качестве мастера. Также на рынке существуют специальные микросхемы, такие как MAX3162 и MAX3100, которые могут быть использованы для работы в качестве SPI Master. В нашем случае устройство на базе Arduino будет передавать команды, благодаря которым можно будет выяснить, что ведомое устройство работает и выполняет поставленные требования \cite{felker2010android} \cite{wikiRUGitHub}.
-	
-	
-	%TODO может что-то напишу ещё сюда желательно бы конечно больше текста 
-	
+	В целом, протокол SPI является очень гибким и может быть использован для передачи различных типов данных в зависимости от конкретной системы, которая использует этот протокол и существует множество устройств, которые могут работать в качестве SPI Master. Микроконтроллеры, такие как Arduino, Raspberry Pi или STM32, имеют встроенные контроллеры SPI, которые могут быть использованы в качестве мастера. Также на рынке существуют специальные микросхемы, такие как MAX3162 и MAX3100, которые могут быть использованы для работы в качестве SPI Master. В нашем случае устройство на базе Arduino будет передавать команды, благодаря которым можно будет выяснить, что ведомое устройство работает и выполняет поставленные требования \cite{felker2010android} \cite{wikiRUGitHub}.	
 
-\chapter{Создание макета устройства} %TODO стоит изменить название потом 
+\chapter{Создание макета устройства} 
 	Для реализации проекта была выбрана ввиду своих удобств плата на базе микроконтроллера ATmega328 --- Arduino UNO со следующими характеристиками: 
 	\begin{itemize}
 		\item Напряжение питания: 5 В.
@@ -97,7 +92,7 @@
 		\item Режим 3 (CPOL=1, CPHA=1): данные изменяются на фронте, а тактовый сигнал на спаде.
 	\end{enumerate}
 	
-		В нашем устройстве интерфейс будет работать в режиме 0 и первым будет слаться младшим бит.
+		В нашем устройстве интерфейс будет работать в режиме 0 на частоте 4 МГц и первым будет слаться младшим бит. 
 	
 	Для разработки программы была выбрана интегрированная среда разработки Arduino IDE ввиду следующих преимуществ.
 	\begin{enumerate}
@@ -116,11 +111,12 @@
 	\caption{Схема матричной клавиатуры}
 	\end{figure}	
 	
-	Для обработки клавиш потребовалась библиотека. В Arduino IDE для этих целей есть <<Keypad.h>>. Эта библиотека предназначена для работы с матричными клавиатурами. Она позволяет считывать нажатия клавиш и определять, какая именно клавиша была нажата.
-	После её подключения нужно определить объект класса Keypad и задать параметры его работы, такие как количество строк и столбцов, которые есть в клавиатуре. В нашем случае клавиатура 4х5. Необходимости использовать внешние резисторы или диоды нет, так как библиотека использует внутренние подтягивающие резисторы в микроконтроллере и дополнительно обеспечивает высокое входное сопротивление на всех неиспользуемых выводах столбцов.
+	Для обработки клавиш потребовалась библиотека. В Arduino IDE для этих целей есть <<Keypad.h>>. Эта библиотека предназначена для работы с матричными клавиатурами. Она позволяет считывать нажатия клавиш и определять, какая именно клавиша была нажата. После её подключения нужно определить объект класса Keypad и задать параметры его работы, такие как количество строк и столбцов, которые есть в клавиатуре. В нашем случае клавиатура 4х5. Необходимости использовать внешние резисторы или диоды нет, так как библиотека использует внутренние подтягивающие резисторы в микроконтроллере и дополнительно обеспечивает высокое входное сопротивление на всех неиспользуемых выводах столбцов.
+	
+	В листинге 2.1 мы определяем, что наша клавиатура содержит 4 строки и 5 столбцов, а также задаем, какие символы соответствуют каким клавишам. Затем мы указываем, к каким пинам на Arduino подключены строки и столбцы клавиатуры. После этого, используя метод customKeypad.getKey() считываем нажатие клавиш. 
 	
 	\begin{code}
-	\captionof{listing}{*}
+	\captionof{listing}{Инициализация матричной клавиатуры}
 	\begin{minted}
 	[
 	frame=lines,
@@ -130,7 +126,11 @@
 	linenos,
 	breaklines
 	]
-	{text}
+	{cpp}
+#include <Keypad.h>
+const byte ROWS = 4;
+const byte COLS = 5;
+char button;
 char keys[ROWS][COLS] = {  // раскладка клавиатуры
   { '0', '1', '2', '3', 'h' },
   { '4', '5', '6', '7', 'x' },
@@ -140,15 +140,18 @@ char keys[ROWS][COLS] = {  // раскладка клавиатуры
 byte rowPins[ROWS] = { A0, A1, A2, A3 };  // подключение к строкам клавиатуры
 byte colPins[COLS] = { 6, 5, 4, 3, 2 };   // подключение к столбцам клавиатуры
 Keypad customKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); // инициализация клавиатуры
+
+void loop() {
+  button = customKeypad.getKey();  // определение нажатой кнопки
+}
 	\end{minted}
 	\end{code}
 	
-	В листинге 2.1 мы определяем, что наша клавиатура содержит 4 строки и 5 столбцов, а также задаем, какие символы соответствуют каким клавишам. Затем мы указываем, к каким пинам на Arduino подключены строки и столбцы клавиатуры. После этого, используя метод customKeypad.getKey() считываем нажатие клавиш. 
 	
-	Для ввода и отправки команды потребовалось написать функцию для определения нажатой клавиши.
+	Для обработки кнопок была написана функция detectbuttons (листинг 2.2). На вход подпрограммы ничего не поступает и никаких значений она не возвращает. Функция вызывает нужную подпрограмму по нажатой клавише. Рисунок 2.2 поясняет ход работы подпрограммы. 
 	
 	\begin{code}
-	\captionof{listing}{*}
+	\captionof{listing}{Функция обработки кнопок}
 	\begin{minted}
 	[
 	frame=lines,
@@ -158,71 +161,98 @@ Keypad customKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); //
 	linenos,
 	breaklines
 	]
-	{text}
+	{cpp}
 void detectbuttons() {
-  if (button == '0') {
-    //    Serial.println("Button 0");
-    if (cmd == 0)
-      cmd = 0x0000;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0000;
-  }
+  switch (button) {
+    case '0':
+      //    Serial.println("Button 0");
+      append_cmd(0x0000);
+      break;
 
-  ...
+    ...
+    
+    case 'F':
+      //    Serial.println("Button F");
+      append_cmd(0x000F);
+      break;
 
-  if (button == 'F') {
-    //    Serial.println("Button F");
-    if (cmd == 0)
-      cmd = 0x000F;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000F;
-  }
-
-  if (button == 's') {
-    //    Serial.println("Button send");
+    case 's':
+      //    Serial.println("Button send");
       pack[0] = cmd;
       pack[1] = cmd >> 8;
       digitalWrite(SS, LOW);
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 2; i++)
         SPI.transfer(pack[i]);
-      }
       digitalWrite(SS, HIGH);
       delay(1000);
-   }
+      break;
 
+    case 'd':
+      //    Serial.println("Button del");
+      cmd = cmd >> 4;
+      break;
 
-  if (button == 'd') {
-    //    Serial.println("Button del");
-    cmd = cmd >> 4;
+    case 'h':  //help
+      do {
+        myOLED.clrScr();
+        myOLED.print("Help", CENTER, 0);
+        myOLED.print("0 1 2 3 h", CENTER, 16);
+        myOLED.print("4 5 6 7 x", CENTER, 26);
+        myOLED.print("8 9 A B s", CENTER, 36);
+        myOLED.print("C D E F d", CENTER, 46);
+        myOLED.update();
+        button = customKeypad.getKey();
+        detectbuttons();
+      } while (!button);
+      cmd = 0x0000;
+      break;
   }
-
-  if (button == 'h') {  //help
-    while (1) {
-      myOLED.clrScr();
-      myOLED.print("Help", CENTER, 0);
-      myOLED.print("0 1 2 3 h", CENTER, 16);
-      myOLED.print("4 5 6 7 x", CENTER, 26);
-      myOLED.print("8 9 A B s", CENTER, 36);
-      myOLED.print("C D E F d", CENTER, 46);
-      myOLED.update();
-      button = customKeypad.getKey();
-      detectbuttons();
-      if (button) {
-        cmd = 0x00;
-        break;
-      }
-    }
-  }
+}
 	\end{minted}
 	\end{code}
 	
+	\begin{figure}[H]
+	\begin{center}
+	\includegraphics[scale=0.8]{detectbuttons}
+	\end{center}	
+	\caption{Блок-схема подпрограммы обработки кнопок.}
+	\end{figure}	
+	
+	Для ввода команды была написала функция append\_cmd (листинг 2.3). Подпрограмма  только принимает. На вход поступает, вводимый пользователем набор бит, а далее записывается в команду. Ход работы поясняется на рисунке 2.3. 
+	\begin{code}
+	\captionof{listing}{Функция ввода команды}
+	\begin{minted}
+	[
+	frame=lines,
+	framesep=2mm,
+	baselinestretch=1.2,
+	%fontsize=\footnotesize,
+	linenos,
+	breaklines
+	]
+	{cpp}
+void append_cmd(uint16_t comand) {
+  if (cmd == 0) {
+    cmd = comand;
+  } else {
+    cmd = cmd << 4;
+    cmd |= comand;
+  }
+}
+	\end{minted}
+	\end{code}
+	
+	\begin{figure}[H]
+	\begin{center}
+	\includegraphics[scale=1]{append_cmd}
+	\end{center}	
+	\caption{Блок-схема подпрограммы ввода команды.}
+	\end{figure}	
 	
 	В качестве устройства вывода был выбран OLED дисплей. У данного индикатора пиксели излучают свет сами, изображение получается более контрастным и насыщенным, с хорошим углом обзора. Ко всему этому у индикатора низкое энергопотребление. Имеет разрешение 128 на 64 точек, управляется по интерфейсу I2C, графический чип SSD1306 и питается от 3 --- 5 В. Для работы с ним была выбрана библиотека <<OLED\_I2C.h>> за её простоту и лёгкость. Сам же дисплей нужен для отображения команды, которую вводит пользователь.
 	
 	\begin{code}
-	\captionof{listing}{*}
+	\captionof{listing}{Вывод команды на дисплей}
 	\begin{minted}
 	[
 	frame=lines,
@@ -232,12 +262,11 @@ void detectbuttons() {
 	linenos,
 	breaklines
 	]
-	{text}
+	{cpp}
 #include <OLED_I2C.h>
 OLED myOLED(SDA, SCL);
 extern uint8_t SmallFont[];
 uint16_t cmd;
-byte pack[2];
 void setup() {
 myOLED.begin();
 myOLED.setFont(SmallFont);
@@ -253,38 +282,51 @@ myOLED.update();
 	\end{minted}
 	\end{code}
 	
-	Вид макета описывается следующей функциональной схемой.
+	Полный код программы приведён в приложении. После успешной компиляции среда разработки вывело сообщение о том, что программа использует 6892 байт (21\%) памяти устройства. Всего доступно 32256 байт. %TODO
+	\newpage
+	Блок-схема на рисунке 2.4 поясняет работу программы.
+	\begin{figure}[H]
+	\begin{center}
+	\includegraphics[scale=1]{main}
+	\end{center}	
+	\caption{Блок-схема главной программы.}
+	\end{figure}	
+	
+	\newpage
+	Макет описывается следующей функциональной схемой (рис. 2.5). Подключение клавиатуры может быть осуществлено к любым свободным пинам. В нашем случае строки подключаются к аналоговым пинам 0, 1, 2, 3, а столбцы к цифровым 6, 5, 4, 3, 2. Дисплей подключен по шине I2C, а линии SPI идут к ведомому устройству. 
 	\begin{figure}[H]
 	\begin{center}
 	\includegraphics[scale=1]{scheme}
 	\end{center}	
-	\caption{Функциональная схема}
+	\caption{Функциональная схема SPI тестера.}
 	\end{figure}	
 	
 		
 \chapter{Описание работы устройства}
-	Схему работы можно представить следующей структурной (рис.4.1) и функциональной схемами (рис. 4.2).
+%TODO нужно хорошо описать процесс работы пользователя с устройством
+	Процесс работы пользователя с устройством можно представить следующей структурной схемой (рис.4.1). 
 	\begin{figure}[H]
 	\begin{center}
-	\includegraphics[scale=1]{block}
+	\includegraphics[scale=1]{struct} %TODO всё равно не нравится надо подумать как перерисовать лучше
 	\end{center}	
-	\caption{Структурная схема}
+	\caption{Структурная схема.}
 	\end{figure}	
-		
+	
+	Как упоминалось ранее устройством ввода является матричная клавиатура. Кроме клавиш для ввода команды на ней расположены клавиши вызова подсказки с раскладкой клавиатуры, обратный пробел и кнопка отправки команды. Всё рабочее время устройство 
 
-	С помощью клавиатуры пользователь вводит команду, которая передаётся на микроконтроллер, после чего она выводится на дисплей по интерфейсу I2С, затем после подтверждения передаётся на ведомое устройство по протоколу SPI.
+	%TODO картинки с анализатора 
 
 \chapter*{Заключение}
-\addcontentsline{toc}{chapter}{Заключение}
+\addcontentsline{toc}{chapter}{Заключение} 
 	В результате научно-исследовательской работы были выполнены следующие задачи:
 	\begin{enumerate}
-		\item Проведён обзор семейств микроконтроллеров и осуществлён выбор микроконтроллера для дальнейшей реализации проекта.
-		\item Изучены принципы работы интерфейсов передачи данных.
-		\item Рассмотрены устройства ввода-вывода для проекта.
-		\item Спроектирована схема работы тестера.
+		\item Выбраны инструменты для разработки программы.
+		\item Разработана программа.
+		\item Собран макет.
+		\item Проверена работоспособность.
 	\end{enumerate}
 	
-	В дальнейшем предполагается применение полученных знаний для разработки собственного устройства на выбранном микроконтроллере.
+	По итогам работы цель достигнута: создан рабочий макет тестера ведомых SPI устройств. 
 \newpage
 \addcontentsline{toc}{chapter}{Список использованной литературы}
 \printbibliography[title={Список использованной литературы}] 
@@ -293,7 +335,7 @@ myOLED.update();
 \chapter*{\raggedleft\label{appendix1}Приложение}
 \section*{Текст программы}
 \begin{code}
-\captionof*{listing}{*}
+\captionof*{listing}{Тестер ведомых SPI устройств}
 	\begin{minted}
 	[
 	frame=lines,
@@ -303,7 +345,7 @@ myOLED.update();
 	linenos,
 	breaklines
 	]
-	{text}
+	{cpp}
 #include <SPI.h>
 #include <OLED_I2C.h>
 OLED myOLED(SDA, SCL);
@@ -325,9 +367,7 @@ uint16_t cmd;
 byte pack[2];
 void setup() {
   //Serial.begin(9600);
-  pinMode(SS, OUTPUT); // настройка линии SS как выход
   SPI.begin();
-  digitalWrite(SS, HIGH);
   myOLED.begin();
   myOLED.setFont(SmallFont);
   myOLED.clrScr();
@@ -344,186 +384,131 @@ void loop() {
   myOLED.update();
 }
 
+
+void append_cmd(uint16_t comand) {
+  if (cmd == 0) {
+    cmd = comand;
+  } else {
+    cmd = cmd << 4;
+    cmd |= comand;
+  }
+}
+
 void detectbuttons() {
-  if (button == '0') {
-    //    Serial.println("Button 0");
-    if (cmd == 0)
-      cmd = 0x0000;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0000;
-  }
+  switch (button) {
+    case '0':
+      //    Serial.println("Button 0");
+      append_cmd(0x0000);
+      break;
 
-  if (button == '1') {
-    //    Serial.println("Button 1");
-    if (cmd == 0)
-      cmd = 0x0001;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0001;
-  }
+    case '1':
+      //    Serial.println("Button 1");
+      append_cmd(0x0001);
+      break;
 
-  if (button == '2') {
-    //    Serial.println("Button 2");
-    if (cmd == 0)
-      cmd = 0x0002;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0002;
-  }
+    case '2':
+      //    Serial.println("Button 2");
+      append_cmd(0x0002);
+      break;
 
-  if (button == '3') {
-    //    Serial.println("Button 3");
-    if (cmd == 0)
-      cmd = 0x0003;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0003;
-  }
+    case '3':
+      //    Serial.println("Button 3");
+      append_cmd(0x0003);
+      break;
 
-  if (button == '4') {
-    //    Serial.println("Button 4");
-    if (cmd == 0)
-      cmd = 0x0004;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0004;
-  }
+    case '4':
+      //    Serial.println("Button 4");
+      append_cmd(0x0004);
+      break;
 
-  if (button == '5') {
-    //    Serial.println("Button 5");
-    if (cmd == 0)
-      cmd = 0x0005;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0005;
-  }
+    case '5':
+      //    Serial.println("Button 5");
+      append_cmd(0x0005);
+      break;
 
-  if (button == '6') {
-    //    Serial.println("Button 6");
-    if (cmd == 0)
-      cmd = 0x0006;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0006;
-  }
+    case '6':
+      //    Serial.println("Button 6");
+      append_cmd(0x0006);
+      break;
 
-  if (button == '7') {
-    //    Serial.println("Button 7");
-    if (cmd == 0)
-      cmd = 0x0007;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0007;
-  }
+    case '7':
+      //    Serial.println("Button 7");
+      append_cmd(0x0007);
+      break;
 
-  if (button == '8') {
-    //    Serial.println("Button 8");
-    if (cmd == 0)
-      cmd = 0x0008;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0008;
-  }
+    case '8':
+      //    Serial.println("Button 8");
+      append_cmd(0x0008);
+      break;
 
-  if (button == '9') {
-    //    Serial.println("Button 9");
-    if (cmd == 0)
-      cmd = 0x0009;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x0009;
-  }
+    case '9':
+      //    Serial.println("Button 9");
+      append_cmd(0x0009);
+      break;
 
-  if (button == 'A') {
-    //    Serial.println("Button A");
-    if (cmd == 0)
-      cmd = 0x000A;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000A;
-  }
+    case 'A':
+      //    Serial.println("Button A");
+      append_cmd(0x000A);
+      break;
 
-  if (button == 'B') {
-    //    Serial.println("Button B");
-    if (cmd == 0)
-      cmd = 0x000B;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000B;
-  }
+    case 'B':
+      //    Serial.println("Button B");
+      append_cmd(0x000B);
+      break;
 
-  if (button == 'C') {
-    //    Serial.println("Button C");
-    if (cmd == 0)
-      cmd = 0x000C;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000C;
-  }
+    case 'C':
+      //    Serial.println("Button C");
+      append_cmd(0x000C);
+      break;
 
-  if (button == 'D') {
-    //    Serial.println("Button D");
-    if (cmd == 0)
-      cmd = 0x000D;
-    else
-      cmd = (cmd << 4);  //Pressed twice
-      cmd |= 0x000D;
-  }
+    case 'D':
+      //    Serial.println("Button D");
+      append_cmd(0x000D);
+      break;
 
-  if (button == 'E') {
-    //    Serial.println("Button E");
-    if (cmd == 0)
-      cmd = 0x000E;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000E;
-  }
+    case 'E':
+      //    Serial.println("Button E");
+      append_cmd(0x000E);
+      break;
 
-  if (button == 'F') {
-    //    Serial.println("Button F");
-    if (cmd == 0)
-      cmd = 0x000F;
-    else
-      cmd = cmd << 4;  //Pressed twice
-      cmd |= 0x000F;
-  }
+    case 'F':
+      //    Serial.println("Button F");
+      append_cmd(0x000F);
+      break;
 
-  if (button == 's') {
-    //    Serial.println("Button send");
+    case 's':
+      //    Serial.println("Button send");
       pack[0] = cmd;
       pack[1] = cmd >> 8;
       digitalWrite(SS, LOW);
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 2; i++)
         SPI.transfer(pack[i]);
-      }
       digitalWrite(SS, HIGH);
       delay(1000);
-   }
+      break;
 
-  if (button == 'd') {
-    //    Serial.println("Button del");
-    cmd = cmd >> 4;
-  }
+    case 'd':
+      //    Serial.println("Button del");
+      cmd = cmd >> 4;
+      break;
 
-  if (button == 'h') {  //help
-    while (1) {
-      myOLED.clrScr();
-      myOLED.print("Help", CENTER, 0);
-      myOLED.print("0 1 2 3 h", CENTER, 16);
-      myOLED.print("4 5 6 7 x", CENTER, 26);
-      myOLED.print("8 9 A B s", CENTER, 36);
-      myOLED.print("C D E F d", CENTER, 46);
-      myOLED.update();
-      button = customKeypad.getKey();
-      detectbuttons();
-      if (button) {
-        cmd = 0x00;
-        break;
-      }
-    }
+    case 'h':  //help
+      do {
+        myOLED.clrScr();
+        myOLED.print("Help", CENTER, 0);
+        myOLED.print("0 1 2 3 h", CENTER, 16);
+        myOLED.print("4 5 6 7 x", CENTER, 26);
+        myOLED.print("8 9 A B s", CENTER, 36);
+        myOLED.print("C D E F d", CENTER, 46);
+        myOLED.update();
+        button = customKeypad.getKey();
+        detectbuttons();
+      } while (!button);
+      cmd = 0x0000;
+      break;
   }
 }
+
 	\end{minted}
 	\end{code}
 \end{document}

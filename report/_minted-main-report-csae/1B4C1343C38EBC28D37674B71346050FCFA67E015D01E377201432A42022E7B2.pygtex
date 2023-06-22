@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}OLED\PYGZus{}I2C.h\PYGZgt{}}
+\PYG{n}{OLED}\PYG{+w}{ }\PYG{n+nf}{myOLED}\PYG{p}{(}\PYG{n}{SDA}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SCL}\PYG{p}{);}
+\PYG{k}{extern}\PYG{+w}{ }\PYG{k+kt}{uint8\PYGZus{}t}\PYG{+w}{ }\PYG{n}{SmallFont}\PYG{p}{[];}
+\PYG{k+kt}{uint16\PYGZus{}t}\PYG{+w}{ }\PYG{n}{cmd}\PYG{p}{;}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setup}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{();}
+\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{setFont}\PYG{p}{(}\PYG{n}{SmallFont}\PYG{p}{);}
+\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{clrScr}\PYG{p}{();}
+\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{update}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{loop}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{clrScr}\PYG{p}{();}
+\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{n}{String}\PYG{p}{(}\PYG{n}{cmd}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{HEX}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{25}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{//выводим на экран вводимую команду}
+\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{update}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

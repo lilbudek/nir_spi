@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{x}{\PYGZsh{}include \PYGZlt{}OLED\PYGZus{}I2C.h\PYGZgt{}}
+\PYG{x}{OLED myOLED(SDA, SCL);}
+\PYG{x}{extern uint8\PYGZus{}t SmallFont[];}
+\PYG{x}{uint16\PYGZus{}t cmd;}
+\PYG{x}{void setup() \PYGZob{}}
+\PYG{x}{myOLED.begin();}
+\PYG{x}{myOLED.setFont(SmallFont);}
+\PYG{x}{myOLED.clrScr();}
+\PYG{x}{myOLED.update();}
+\PYG{x}{\PYGZcb{}}
+
+\PYG{x}{void loop() \PYGZob{}}
+\PYG{x}{myOLED.clrScr();}
+\PYG{x}{myOLED.print(String(cmd, HEX), CENTER, 25);  //выводим на экран вводимую команду}
+\PYG{x}{myOLED.update();}
+\PYG{x}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}Keypad.h\PYGZgt{}}
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{ROWS}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{COLS}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{;}
+\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{button}\PYG{p}{;}
+\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{keys}\PYG{p}{[}\PYG{n}{ROWS}\PYG{p}{][}\PYG{n}{COLS}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{  }\PYG{c+c1}{// раскладка клавиатуры}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}2\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}3\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}h\PYGZsq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}4\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}5\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}6\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}7\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}x\PYGZsq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}8\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}9\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}B\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}s\PYGZsq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}C\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}D\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}E\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}F\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}d\PYGZsq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{rowPins}\PYG{p}{[}\PYG{n}{ROWS}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{A0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{A1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{A2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{A3}\PYG{+w}{ }\PYG{p}{\PYGZcb{};}\PYG{+w}{  }\PYG{c+c1}{// подключение к строкам клавиатуры}
+\PYG{n}{byte}\PYG{+w}{ }\PYG{n}{colPins}\PYG{p}{[}\PYG{n}{COLS}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{p}{\PYGZcb{};}\PYG{+w}{   }\PYG{c+c1}{// подключение к столбцам клавиатуры}
+\PYG{n}{Keypad}\PYG{+w}{ }\PYG{n}{customKeypad}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Keypad}\PYG{p}{(}\PYG{n}{makeKeymap}\PYG{p}{(}\PYG{n}{keys}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{rowPins}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{colPins}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ROWS}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{COLS}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// инициализация клавиатуры}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{loop}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{button}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{customKeypad}\PYG{p}{.}\PYG{n}{getKey}\PYG{p}{();}\PYG{+w}{  }\PYG{c+c1}{// определение нажатой кнопки}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

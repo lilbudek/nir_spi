@@ -1,0 +1,48 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{detectbuttons}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{switch}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{button}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button 0\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x0000}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{p}{...}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}F\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button F\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{append\PYGZus{}cmd}\PYG{p}{(}\PYG{l+m+mh}{0x000F}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}s\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button send\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{pack}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cmd}\PYG{p}{;}
+\PYG{+w}{      }\PYG{n}{pack}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{8}\PYG{p}{;}
+\PYG{+w}{      }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{SS}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{LOW}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{SPI}\PYG{p}{.}\PYG{n}{transfer}\PYG{p}{(}\PYG{n}{pack}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]);}
+\PYG{+w}{      }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{SS}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{HIGH}\PYG{p}{);}
+\PYG{+w}{      }\PYG{n}{delay}\PYG{p}{(}\PYG{l+m+mi}{1000}\PYG{p}{);}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}d\PYGZsq{}}\PYG{p}{:}
+\PYG{+w}{      }\PYG{c+c1}{//    Serial.println(\PYGZdq{}Button del\PYGZdq{});}
+\PYG{+w}{      }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}h\PYGZsq{}}\PYG{p}{:}\PYG{+w}{  }\PYG{c+c1}{//help}
+\PYG{+w}{      }\PYG{k}{do}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{clrScr}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Help\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}0 1 2 3 h\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{16}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}4 5 6 7 x\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{26}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}8 9 A B s\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{36}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}C D E F d\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CENTER}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{46}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{myOLED}\PYG{p}{.}\PYG{n}{update}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{button}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{customKeypad}\PYG{p}{.}\PYG{n}{getKey}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{detectbuttons}\PYG{p}{();}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{button}\PYG{p}{);}
+\PYG{+w}{      }\PYG{n}{cmd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mh}{0x0000}\PYG{p}{;}
+\PYG{+w}{      }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
