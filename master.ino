@@ -136,7 +136,6 @@ void detectbuttons() {
       for (int i = 0; i < 2; i++)
         SPI.transfer(pack[i]);
       digitalWrite(SS, HIGH);
-      delay(1000);
       break;
 
     case 'd':
