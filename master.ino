@@ -145,7 +145,7 @@ void detectbuttons() {
       break;
 
     case 'h':  //help
-      while (1) {
+      do {
         myOLED.clrScr();
         myOLED.print("Help", CENTER, 0);
         myOLED.print("0 1 2 3 h", CENTER, 16);
@@ -155,11 +155,10 @@ void detectbuttons() {
         myOLED.update();
         button = customKeypad.getKey();
         detectbuttons();
-        if (button) {
-          cmd = 0x00;
-          break;
-        }
-      }
+      } while (!button);
+        cmd = 0x0000;
       break;
   }
 }
+
+
