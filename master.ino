@@ -19,9 +19,7 @@ uint16_t cmd;
 byte pack[2];
 void setup() {
   //Serial.begin(9600);
-  pinMode(SS, OUTPUT);  // настройка линии SS как выход
   SPI.begin();
-  digitalWrite(SS, HIGH);
   myOLED.begin();
   myOLED.setFont(SmallFont);
   myOLED.clrScr();
