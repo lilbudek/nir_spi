@@ -38,166 +38,96 @@ void loop() {
   myOLED.update();
 }
 
+
+void append_cmd(uint16_t comand) {
+  if (cmd == 0) {
+    cmd = comand;
+  } else {
+    cmd = cmd << 4;
+    cmd |= comand;
+  }
+}
+
 void detectbuttons() {
   switch (button) {
     case '0':
       //    Serial.println("Button 0");
-      if (cmd == 0) {
-        cmd = 0x0000;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0000;
-      }
+      append_cmd(0x0000);
       break;
 
     case '1':
       //    Serial.println("Button 1");
-      if (cmd == 0) {
-        cmd = 0x0001;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0001;
-      }
+      append_cmd(0x0001);
       break;
 
     case '2':
       //    Serial.println("Button 2");
-      if (cmd == 0) {
-        cmd = 0x0002;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0002;
-      }
+      append_cmd(0x0002);
       break;
 
     case '3':
       //    Serial.println("Button 3");
-      if (cmd == 0) {
-        cmd = 0x0003;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0003;
-      }
+      append_cmd(0x0003);
       break;
 
     case '4':
       //    Serial.println("Button 4");
-      if (cmd == 0) {
-        cmd = 0x0004;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0004;
-      }
+      append_cmd(0x0004);
       break;
 
     case '5':
       //    Serial.println("Button 5");
-      if (cmd == 0) {
-        cmd = 0x0005;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0005;
-      }
+      append_cmd(0x0005);
       break;
 
     case '6':
       //    Serial.println("Button 6");
-      if (cmd == 0) {
-        cmd = 0x0006;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0006;
-      }
+      append_cmd(0x0006);
       break;
 
     case '7':
       //    Serial.println("Button 7");
-      if (cmd == 0) {
-        cmd = 0x0007;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0007;
-      }
+      append_cmd(0x0007);
       break;
 
     case '8':
       //    Serial.println("Button 8");
-      if (cmd == 0) {
-        cmd = 0x0008;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0008;
-      }
+      append_cmd(0x0008);
       break;
 
     case '9':
       //    Serial.println("Button 9");
-      if (cmd == 0) {
-        cmd = 0x0009;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x0009;
-      }
+      append_cmd(0x0009);
       break;
 
     case 'A':
       //    Serial.println("Button A");
-      if (cmd == 0) {
-        cmd = 0x000A;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x000A;
-      }
+      append_cmd(0x000A);
       break;
 
     case 'B':
       //    Serial.println("Button B");
-      if (cmd == 0) {
-        cmd = 0x000B;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x000B;
-      }
+      append_cmd(0x000B);
       break;
 
     case 'C':
       //    Serial.println("Button C");
-      if (cmd == 0) {
-        cmd = 0x000C;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x000C;
-      }
+      append_cmd(0x000C);
       break;
 
     case 'D':
       //    Serial.println("Button D");
-      if (cmd == 0) {
-        cmd = 0x000D;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x000D;
-      }
+      append_cmd(0x000D);
       break;
 
     case 'E':
       //    Serial.println("Button E");
-      if (cmd == 0) {
-        cmd = 0x000E;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x000E;
-      }
+      append_cmd(0x000E);
       break;
 
     case 'F':
       //    Serial.println("Button F");
-      if (cmd == 0) {
-        cmd = 0x000F;
-      } else {
-        cmd = cmd << 4;
-        cmd |= 0x000F;
-      }
+      append_cmd(0x000F);
       break;
 
     case 's':
