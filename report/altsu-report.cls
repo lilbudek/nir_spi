@@ -329,9 +329,13 @@
 \def\fnum@table{\hfill\tablename~\thetable\\}
 \renewcommand{\thelisting}{\thechapter\arabic{listing}}
 \def\fnum@listing{\hfill\listingname~\thelisting\\}
+
 %картинки
 \graphicspath{{pictures/}}
 \DeclareGraphicsExtensions{.png,.jpg,.pdf, .jpeg}
+
+\usepackage{caption}
+\usepackage{subcaption}
 
 % Определение титульной страницы.
 \def\maketitle {
@@ -399,7 +403,7 @@
   
   Полный объём работы составляет \formbytotal{TotPages}{страниц}{у}{ы}{}, включая
   %\formbytotal{totalcount@figure}{рисун}{ок}{ка}{ков} 
-* рисунков и * источника.
+8 рисунков и 7 источников.
   
   
   \@abstractRU
