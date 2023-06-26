@@ -1,0 +1,107 @@
+\documentclass[10pt]{beamer}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\usetheme{Warsaw}
+
+\newcommand{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\op}[1]{\mathop{\mathrm{#1}}}
+
+\begin{document}
+
+\title{Тестер ведомых SPI устройств}
+\author{Вебер Д.С.}
+\date{2022}
+\institute{Алтайский государственный университет}
+
+\frame{\titlepage}
+
+\begin{frame}{Цель и задачи}
+  \textbf{Цель работы:} спроектировать прибор, который будет тестировать управляемое по протоколу SPI устройство путём подачи разных команд.
+
+  \textbf{Задачи:} 
+  \begin{enumerate}
+  \item Исследовать принцип работы SPI интерфейса.
+  \item Выбрать микроконтроллер.
+  \item	Определить какие будут использоваться устройства ввода-вывода.
+  \item	Спроектировать схему работы тестера.
+  \item Провести обзор библиотек для написания кода. 
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Прогресс}
+  \begin{figure}
+  \includegraphics[width=1\textwidth]{spi}
+  \caption{Интерфейс SPI}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}{Прогресс}
+  \begin{figure}
+  \includegraphics[width=0.2\textwidth]{avr}
+  \caption{AVR}
+  \end{figure}
+  
+  \begin{figure}
+  \includegraphics[width=0.2\textwidth]{pi}
+  \caption{Raspberry Pi}
+  \end{figure}
+  
+  \begin{figure}
+  \includegraphics[width=0.2\textwidth]{stm}
+  \caption{STM32}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Прогресс}
+  \begin{figure}
+  \includegraphics[width=0.5\textwidth]{atmega}
+  \caption{ATmega 32U4}
+  \end{figure}
+  Характеристики:
+  \begin{itemize}
+  \item	Рабочее напряжение: 5 В.
+  \item Объём памяти: 32 Кб.
+  \item Оперативная память: 2,5 Кб.
+  \item Количество входов/выходов: 26.
+  \item Встроенные интерфейсы: i2c, spi, uart, usb.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Прогресс}
+  \begin{figure}
+  \includegraphics[width=0.3\textwidth]{block}
+  \caption{Структурная схема}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{План дальнейшей работы}
+  \begin{figure}
+    \includegraphics[width=0.25\textwidth]{oled}
+    \includegraphics[width=0.25\textwidth]{nokia}
+    \caption{Устройства вывода}
+  \end{figure}
+  
+  \begin{figure}
+    \includegraphics[width=0.25\textwidth]{knopki}
+    \includegraphics[width=0.25\textwidth]{encoder}
+    \caption{Устройства ввода}
+  \end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{}
+
+\begin{center}
+{\Huge \textbf{Спасибо за внимание!}}
+\end{center}
+\end{frame}
+
+\end{document}
