@@ -70,18 +70,21 @@
 \setmainlanguage{russian}
 \setotherlanguage{english}
 \defaultfontfeatures{Ligatures={TeX},Renderer=Basic}  %% свойства шрифтов по умолчанию. Для XeTeX опцию Renderer=Basic можно не указывать, о\на необходима для LuaTeX
-
 \setmainfont[Ligatures={TeX,Historic}]{Times New Roman} %% задаёт основной шрифт документа. 
+
+%\setmainfont{Times New Roman} %% задаёт основной шрифт документа. 
 %\setkeys{russian}{babelshorthands=true}
 
 \setromanfont[Mapping=tex-text]{Times New Roman}
-\setsansfont[Mapping=tex-text]{Courier New}
-\setmonofont[Mapping=tex-text]{Arial}
+%\setsansfont[Mapping=tex-text]{Courier New}
+%\setmonofont[Mapping=tex-text]{Arial}
 
 \newfontfamily{\cyrillicfont}{Times New Roman}
 \newfontfamily{\cyrillicfontrm}{Times New Roman}
-\newfontfamily{\cyrillicfonttt}{Courier New}
-\newfontfamily{\cyrillicfontsf}{Arial}
+\newfontfamily{\cyrillicfonttt}{Times New Roman}
+\newfontfamily{\cyrillicfontsf}{Times New Roman}
+%\newfontfamily{\cyrillicfonttt}{Courier New}
+%\newfontfamily{\cyrillicfontsf}{Arial}
 
 \RequirePackage{graphicx}
 \RequirePackage{float}
@@ -185,36 +188,20 @@
 
 %%% Оглавление %%%
 \usepackage[dotinlabels]{titletoc}
-%\titlecontents{chapter}
-%              [10pt] % [1.5em]
-%              {\vspace{-5cm}} % {\addvspace{\baselineskip}} % 20230618
-%              {\contentslabel{1.5em}\hspace*{0em}}
-%              {}
-%             {\titlerule*[1pc]{.}\contentspage}
-
-% Правка 20230617
 \usepackage[pagestyles]{titlesec}
 \titleformat{\chapter}%
             {\centering\normalfont\bfseries}
             {\thechapter}
             {14pt}
             {\MakeUppercase}
-% Правка 20230618
-%\titleformat{name=\chapter,numberless}%
-%            {\raggedleft\normalfont\bfseries}
-%            {\thechapter}
-%            {14pt}
-%            {\MakeUppercase}
-% Правка 20230617
 \titleformat{\section}%
-            {\centering\normalfont\bfseries}
+            {\normalfont\bfseries}
             {\thesection}
             {14pt}
             {}
-% Правка 20230618
 \titleformat{\subsection} % command
             [hang]                 % shape
-            {\centering\bfseries\normalsize} % format
+            {\bfseries\normalsize} % format
             {\thesubsection}       % label
             {1em}                  % Spacing between label and title
             {}                     % before code
@@ -224,8 +211,8 @@
 %{0pt}                  % Above
 %{0pt}                  % Below
 \titlespacing{\chapter}{0pt}{*0}{15pt}
-\titlespacing{\section}{0pt}{10pt}{10pt}
-\titlespacing{\subsection}{0pt}{8pt}{8pt}
+\titlespacing{\section}{\parindent}{10pt}{10pt}
+\titlespacing{\subsection}{\parindent}{8pt}{8pt}
 
 \setlength{\parindent}{1.27cm}
 \setlength{\parskip}{0cm}
@@ -242,15 +229,26 @@
 %\renewcommand{\cftsecdotsep}{\cftnodots} % Убрать точки
 
 \RequirePackage{fancyhdr}
-\pagestyle{fancy}
+\pagestyle{fancyplain}
 \fancyhf{}
-\rhead{\thepage} % номер страницы в правом верхнем углу
+%\rhead{\thepage} % номер страницы в правом верхнем углу
+%\fancyhead[R]{\textsf{\thepage}}
+\fancyhead[R]{\normalfont\bfseries\textbf{\thepage}} % номер страницы в правом верхнем углу
 \renewcommand{\headrulewidth}{0pt} % без линии
-\fancypagestyle{plain}{
-  \fancyhf{}
-  \rhead{\thepage}
-  \renewcommand{\headrulewidth}{0pt}
-}
+
+
+%\fancypagestyle{plain}{
+%  \fancyhf{}
+%  \rhead{\thepage} % номер страницы в правом верхнем углу
+%  \fancyhead[E]{\thepage}
+%  \renewcommand{\headrulewidth}{0pt} % без линии
+%}
+%\fancypagestyle{fancyplain}{
+%  \fancyhf{}
+%  \rhead{\thepage} % номер страницы в правом верхнем углу
+%  \fancyhead[E]{\thepage}
+%  \renewcommand{\headrulewidth}{0pt} % без линии
+%}
 
 \RequirePackage{csquotes}
 \RequirePackage{epigraph}
@@ -401,16 +399,15 @@
     РЕФЕРАТ
   \end{center}
   
-  Полный объём работы составляет \formbytotal{TotPages}{страниц}{у}{ы}{}, включая
-  %\formbytotal{totalcount@figure}{рисун}{ок}{ка}{ков} 
-8 рисунков и 7 источников.
-  
+  Полный объём работы составляет \formbytotal{TotPages}{страниц}{у}{ы}{}, включая 8 рисунков.
+  %\formbytotal{totalcount@figure}{рисун}{ок}{ка}{ков} и
+  %\formbytotal{totalcount@table}{таблиц}{у}{ы}{}.
   
   \@abstractRU
   
   Ключевые слова: \@keysRU.
   
-  Отчёт оформлен с помощью системы компьютерной вёрстки \TeX{} и его расширения \XeTeX{} 
+  Отчёт оформлена с помощью системы компьютерной вёрстки \TeX{} и его расширения \XeTeX{} 
   из дистрибутива \textit{TeX Live}.
   
 }

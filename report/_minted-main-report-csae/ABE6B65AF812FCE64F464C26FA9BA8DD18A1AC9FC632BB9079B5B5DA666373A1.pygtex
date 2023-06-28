@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYGZsh{}include \PYGZlt{}SPI.h\PYGZgt{}
+uint16\PYGZus{}t cmd = 0xabcd;
+byte pack[2];
+void setup() \PYGZob{}
+  SPI.begin();
+\PYGZcb{}
+
+void loop() \PYGZob{}
+   pack[0] = cmd;
+   pack[1] = cmd \PYGZgt{}\PYGZgt{} 8;
+   digitalWrite(SS, LOW);
+   for (int i = 0; i \PYGZlt{} 2; i++)
+       SPI.transfer(pack[i]);
+   digitalWrite(SS, HIGH);
+\PYGZcb{}
+\end{Verbatim}

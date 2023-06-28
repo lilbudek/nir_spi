@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYGZsh{}include \PYGZlt{}Keypad.h\PYGZgt{}
+const byte ROWS = 4;
+const byte COLS = 5;
+char button;
+char keys[ROWS][COLS] = \PYGZob{}  // раскладка клавиатуры
+  \PYGZob{} \PYGZsq{}0\PYGZsq{}, \PYGZsq{}1\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}h\PYGZsq{} \PYGZcb{},
+  \PYGZob{} \PYGZsq{}4\PYGZsq{}, \PYGZsq{}5\PYGZsq{}, \PYGZsq{}6\PYGZsq{}, \PYGZsq{}7\PYGZsq{}, \PYGZsq{}x\PYGZsq{} \PYGZcb{},
+  \PYGZob{} \PYGZsq{}8\PYGZsq{}, \PYGZsq{}9\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}s\PYGZsq{} \PYGZcb{},
+  \PYGZob{} \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}F\PYGZsq{}, \PYGZsq{}d\PYGZsq{} \PYGZcb{}
+\PYGZcb{};
+byte rowPins[ROWS] = \PYGZob{} A0, A1, A2, A3 \PYGZcb{};  // подключение к строкам клавиатуры
+byte colPins[COLS] = \PYGZob{} 6, 5, 4, 3, 2 \PYGZcb{};   // подключение к столбцам клавиатуры
+Keypad customKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); // инициализация клавиатуры
+
+void loop() \PYGZob{}
+  button = customKeypad.getKey();  // определение нажатой кнопки
+\PYGZcb{}
+\end{Verbatim}

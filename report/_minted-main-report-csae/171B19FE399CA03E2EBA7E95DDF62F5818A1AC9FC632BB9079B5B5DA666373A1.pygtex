@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+void append\PYGZus{}cmd(uint16\PYGZus{}t comand) \PYGZob{}
+  if (cmd == 0) \PYGZob{}
+    cmd = comand;
+  \PYGZcb{} else \PYGZob{}
+    cmd = cmd \PYGZlt{}\PYGZlt{} 4;
+    cmd |= comand;
+  \PYGZcb{}
+\PYGZcb{}
+\end{Verbatim}

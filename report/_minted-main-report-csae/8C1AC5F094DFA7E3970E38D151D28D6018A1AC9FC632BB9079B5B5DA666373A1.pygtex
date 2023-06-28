@@ -1,0 +1,48 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+void detectbuttons() \PYGZob{}
+  switch (button) \PYGZob{}
+    case \PYGZsq{}0\PYGZsq{}:
+      //    Serial.println(\PYGZdq{}Button 0\PYGZdq{});
+      append\PYGZus{}cmd(0x0000);
+      break;
+
+    ...
+
+    case \PYGZsq{}F\PYGZsq{}:
+      //    Serial.println(\PYGZdq{}Button F\PYGZdq{});
+      append\PYGZus{}cmd(0x000F);
+      break;
+
+    case \PYGZsq{}s\PYGZsq{}:
+      //    Serial.println(\PYGZdq{}Button send\PYGZdq{});
+      pack[0] = cmd;
+      pack[1] = cmd \PYGZgt{}\PYGZgt{} 8;
+      digitalWrite(SS, LOW);
+      for (int i = 0; i \PYGZlt{} 2; i++)
+        SPI.transfer(pack[i]);
+      digitalWrite(SS, HIGH);
+      delay(1000);
+      break;
+
+    case \PYGZsq{}d\PYGZsq{}:
+      //    Serial.println(\PYGZdq{}Button del\PYGZdq{});
+      cmd = cmd \PYGZgt{}\PYGZgt{} 4;
+      break;
+
+    case \PYGZsq{}h\PYGZsq{}:  //help
+      do \PYGZob{}
+        myOLED.clrScr();
+        myOLED.print(\PYGZdq{}Help\PYGZdq{}, CENTER, 0);
+        myOLED.print(\PYGZdq{}0 1 2 3 h\PYGZdq{}, CENTER, 16);
+        myOLED.print(\PYGZdq{}4 5 6 7 x\PYGZdq{}, CENTER, 26);
+        myOLED.print(\PYGZdq{}8 9 A B s\PYGZdq{}, CENTER, 36);
+        myOLED.print(\PYGZdq{}C D E F d\PYGZdq{}, CENTER, 46);
+        myOLED.update();
+        button = customKeypad.getKey();
+        detectbuttons();
+      \PYGZcb{} while (!button);
+      cmd = 0x0000;
+      break;
+  \PYGZcb{}
+\PYGZcb{}
+\end{Verbatim}
