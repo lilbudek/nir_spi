@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.6.19)  23 JUN 2023 23:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.6.19)  30 JUN 2023 12:33
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1219,70 +1219,70 @@ Package hyperref Warning: Option `pdfauthor' has already been used,
 <pictures//spi.png, id=51, 1927.2pt x 602.25pt>
 File: pictures//spi.png Graphic file (type png)
 <use pictures//spi.png>
-Package pdftex.def Info: pictures//spi.png  used on input line 49.
-(pdftex.def)             Requested size: 307.28987pt x 96.02194pt.
+Package pdftex.def Info: pictures//spi.png  used on input line 58.
+(pdftex.def)             Requested size: 276.559pt x 86.41884pt.
  [3
 
  <./pictures//spi.png>]
-<pictures//uno.jpg, id=60, 451.6875pt x 338.76563pt>
+<pictures//uno.jpg, id=61, 451.6875pt x 338.76563pt>
 File: pictures//uno.jpg Graphic file (type jpg)
 <use pictures//uno.jpg>
-Package pdftex.def Info: pictures//uno.jpg  used on input line 66.
+Package pdftex.def Info: pictures//uno.jpg  used on input line 75.
 (pdftex.def)             Requested size: 153.64493pt x 115.23564pt.
  [4
 
  <./pictures//uno.jpg>]
-<pictures//ide.png, id=66, 803.0pt x 602.25pt>
+<pictures//ide.png, id=67, 803.0pt x 602.25pt>
 File: pictures//ide.png Graphic file (type png)
 <use pictures//ide.png>
-Package pdftex.def Info: pictures//ide.png  used on input line 73.
+Package pdftex.def Info: pictures//ide.png  used on input line 82.
 (pdftex.def)             Requested size: 276.559pt x 207.41808pt.
  [5
 
  <./pictures//ide.png>] [6
 
 ]
-<pictures//main.pdf, id=78, 162.6075pt x 602.25pt>
+<pictures//main.pdf, id=79, 162.6075pt x 602.25pt>
 File: pictures//main.pdf Graphic file (type pdf)
 <use pictures//main.pdf>
-Package pdftex.def Info: pictures//main.pdf  used on input line 89.
+Package pdftex.def Info: pictures//main.pdf  used on input line 98.
 (pdftex.def)             Requested size: 61.45703pt x 227.61678pt.
 
-Overfull \vbox (18.6887pt too high) detected at line 89
+Overfull \vbox (18.6887pt too high) detected at line 98
  []
 
 [7
 
  <./pictures//main.pdf>]
-<pictures//scheme.pdf, id=94, 269.08528pt x 177.7842pt>
+<pictures//scheme.pdf, id=95, 269.08528pt x 177.7842pt>
 File: pictures//scheme.pdf Graphic file (type pdf)
 <use pictures//scheme.pdf>
-Package pdftex.def Info: pictures//scheme.pdf  used on input line 96.
+Package pdftex.def Info: pictures//scheme.pdf  used on input line 105.
 (pdftex.def)             Requested size: 307.28987pt x 203.04228pt.
  [8
 
  <./pictures//scheme.pdf>]
-<pictures//struct.pdf, id=109, 151.5261pt x 320.1561pt>
+<pictures//struct.pdf, id=110, 151.5261pt x 320.1561pt>
 File: pictures//struct.pdf Graphic file (type pdf)
 <use pictures//struct.pdf>
-Package pdftex.def Info: pictures//struct.pdf  used on input line 103.
+Package pdftex.def Info: pictures//struct.pdf  used on input line 112.
 (pdftex.def)             Requested size: 107.55333pt x 227.2489pt.
 
-Overfull \vbox (18.32083pt too high) detected at line 103
+Overfull \vbox (18.32083pt too high) detected at line 112
  []
 
 [9
 
  <./pictures//struct.pdf>]
-<pictures//testfreq.png, id=124, 321.2pt x 240.9pt>
+<pictures//testfreq.png, id=125, 321.2pt x 240.9pt>
 File: pictures//testfreq.png Graphic file (type png)
 <use pictures//testfreq.png>
-Package pdftex.def Info: pictures//testfreq.png  used on input line 119.
+Package pdftex.def Info: pictures//testfreq.png  used on input line 128.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
-<pictures//test2.png, id=125, 321.2pt x 240.9pt>
+<pictures//test2.png, id=126, 321.2pt x 240.9pt>
 File: pictures//test2.png Graphic file (type png)
 <use pictures//test2.png>
-Package pdftex.def Info: pictures//test2.png  used on input line 119.
+Package pdftex.def Info: pictures//test2.png  used on input line 128.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
  [10
 
@@ -1303,20 +1303,20 @@ Package rerunfilecheck Info: File `pres.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 25458 strings out of 477459
- 491348 string characters out of 5832156
- 1859388 words of memory out of 5000000
- 45150 multiletter control sequences out of 15000+600000
+ 25459 strings out of 477459
+ 491363 string characters out of 5832156
+ 1861388 words of memory out of 5000000
+ 45151 multiletter control sequences out of 15000+600000
  519141 words of font info for 41 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 128i,12n,122p,379b,650s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,12n,122p,379b,649s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0500.pfb></usr/share/t
 exmf-dist/fonts/type1/public/cm-super/sfss0700.pfb></usr/share/texmf-dist/fonts
 /type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/c
 m-super/sfss0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss100
 0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/sha
 re/texmf-dist/fonts/type1/public/cm-super/sfsx1000.pfb>
-Output written on pres.pdf (11 pages, 329565 bytes).
+Output written on pres.pdf (11 pages, 334319 bytes).
 PDF statistics:
  178 PDF objects out of 1000 (max. 8388607)
  114 compressed objects within 2 object streams

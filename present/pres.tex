@@ -43,9 +43,18 @@
 
 \begin{frame}{Коротко о SPI}
   \begin{figure}
-  \includegraphics[width=1\textwidth]{spi}
+  \includegraphics[width=0.9\textwidth]{spi}
   \caption{Ведущее (Master) и ведомое (Slave) устройства интерфейса SPI.}
   \end{figure}
+\begin{footnotesize}
+  		Интерфейс SPI поддерживает четыре режима работы, которые различаются настройками фазы (CPHA) и полярности (CPOL) сигнала тактирования:
+	\begin{enumerate}
+		\item Режим 0 (CPOL = 0, CPHA = 0): тактовый сигнал в низком уровне, выборка данных по переднему фронту.
+		\item Режим 1 (CPOL = 0, CPHA = 1): тактовый сигнал в низком уровне, выборка данных по заднему фронту.
+		\item Режим 2 (CPOL = 1, CPHA = 0): тактовый сигнал в высоком уровне, выборка данных по переднему фронту.
+		\item Режим 3 (CPOL = 1, CPHA = 1): тактовый сигнал в высоком уровне, выборка данных по заднему фронту.
+	\end{enumerate}
+\end{footnotesize}
 \end{frame}
 
 
